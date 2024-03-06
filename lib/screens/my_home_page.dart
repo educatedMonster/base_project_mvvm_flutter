@@ -1,9 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:base_project_mvvm_flutter/routes/approuter.gr.dart';
+import 'package:base_project_mvvm_flutter/widget/box.dart';
+import 'package:base_project_mvvm_flutter/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../view-models/counter_viewmodel.dart';
+import '../view-models/theme_viewmodel.dart';
+
 
 @RoutePage()
 class MyHomePage extends StatefulWidget {
@@ -15,10 +19,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late CounterViewModel counterViewModel;
+  late ThemeViewModel themeViewModel;
 
   @override
   void initState() {
     counterViewModel = context.read<CounterViewModel>();
+    themeViewModel = context.read<ThemeViewModel>();
     super.initState();
   }
 
@@ -30,9 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     counterViewModel = context.watch<CounterViewModel>();
+    themeViewModel = context.watch<ThemeViewModel>();
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text('Home'),
@@ -65,6 +73,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: const Text(
                     'Click Me',
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Center(
+                  child: MyBox(
+                    color: Theme.of(context).colorScheme.primary,
+                    child: MyButton(
+                      color: Theme.of(context).colorScheme.secondary,
+                      onTap: () {
+                        themeViewModel.toggleTheme();
+                      },
+                    ),
                   ),
                 ),
               ),
