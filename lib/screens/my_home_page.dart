@@ -18,13 +18,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late CounterViewModel counterViewModel;
-  late ThemeViewModel themeViewModel;
+  late CounterViewModel _counterViewModel;
+  late ThemeViewModel _themeViewModel;
+  int _count = 0;
 
   @override
   void initState() {
-    counterViewModel = context.read<CounterViewModel>();
-    themeViewModel = context.read<ThemeViewModel>();
+    _counterViewModel = context.read<CounterViewModel>();
+    _themeViewModel = context.read<ThemeViewModel>();
+
+    _count = _counterViewModel.count;
+
     super.initState();
   }
 
@@ -35,8 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    counterViewModel = context.watch<CounterViewModel>();
-    themeViewModel = context.watch<ThemeViewModel>();
+    _counterViewModel = context.watch<CounterViewModel>();
+    _themeViewModel = context.watch<ThemeViewModel>();
+
+    _count = _counterViewModel.count;
 
     return SafeArea(
       child: Scaffold(
@@ -59,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       'You have pushed the button this many times:',
                     ),
                     Text(
-                      '${counterViewModel.count}',
+                      '$_count',
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
@@ -68,8 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    context.router
-                        .navigate(SecondRoute(count: counterViewModel.count));
+                    context.router.navigate(SecondRoute(count: _count));
                   },
                   child: const Text(
                     'Click Me',
@@ -83,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: MyButton(
                       color: Theme.of(context).colorScheme.secondary,
                       onTap: () {
-                        themeViewModel.toggleTheme();
+                        _themeViewModel.toggleTheme();
                       },
                     ),
                   ),
@@ -95,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            counterViewModel.setIncrementCounter();
+            _counterViewModel.setIncrementCounter();
           },
           tooltip: 'Increment',
           child: const Icon(Icons.add),

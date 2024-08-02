@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyBox extends StatelessWidget {
   const MyBox({
@@ -15,11 +16,11 @@ class MyBox extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(8.0).r,
       ),
-      width: 200,
-      height: 200,
-      padding: const EdgeInsets.all(50.0),
+      width: 200.0.w,
+      height: 200.0.h,
+      padding: const EdgeInsets.all(50.0).r,
       child: child,
     );
   }
