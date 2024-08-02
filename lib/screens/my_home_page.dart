@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../view-models/counter_viewmodel.dart';
 import '../view-models/theme_viewmodel.dart';
 
-
 @RoutePage()
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -105,7 +104,6 @@ class _MyHomePageState extends State<MyHomePage> {
           tooltip: 'Increment',
           child: const Icon(Icons.add),
         ), // This trailing comma makes auto-formatting nicer for build methods.
-
       ),
     );
   }

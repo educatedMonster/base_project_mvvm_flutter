@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class SecondPage extends StatefulWidget {
-  const SecondPage({super.key, required this.count});
-
   final int count;
+
+  const SecondPage({
+    super.key,
+    required this.count,
+  });
 
   @override
   State<SecondPage> createState() => _SecondPageState();
