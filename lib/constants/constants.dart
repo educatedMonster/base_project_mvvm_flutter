@@ -12,11 +12,25 @@ class Constants {
   static const smtpUsername = "alerts@servoitsolutions.ph";
   static const smtpPassword = "qthbpjshctgjnxpw";
 
+  /// Font Family
+  static const constFontMontserrat = 'Montserrat';
+  static const constFontPoppins = 'Poppins';
 
   /// Color
   static const primaryColor = Color.fromRGBO(37, 44, 126, 1); // #2b3493
   static const secondaryColor = Color.fromRGBO(99, 115, 129, 1); // #637381
 
+  static Color textPrimaryColor({
+    required double opacity,
+  }) {
+    return Color.fromRGBO(33, 43, 54, opacity); // #212B36
+  }
+
+  static Color textSecondaryColor({
+    required double opacity,
+  }) {
+    return Color.fromRGBO(99, 115, 129, opacity); // #212B36
+  }
 
   static Color grayColor({
     required double opacity,
@@ -37,6 +51,6 @@ class Constants {
   }
 
   /// Image Assets
-  static const assetMyIcon = "assets/images/my_icon.png";
-  static const assetSplashLogo = "assets/images/servo_logo.gif";
+  static const assetMyIcon = "assets/icon/my_icon.png";
+  static const assetSplashLogo = "assets/image/servo_logo.gif";
 }

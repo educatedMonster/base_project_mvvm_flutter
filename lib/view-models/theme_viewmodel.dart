@@ -13,9 +13,11 @@ class ThemeViewModel with ChangeNotifier {
 
   void toggleTheme() {
     if (_themeData == lightMode) {
-      themeData = darkMode;
+      _themeData = darkMode;
+      notifyListeners();
     } else {
-      themeData = lightMode;
+      _themeData = lightMode;
+      notifyListeners();
     }
   }
 }
