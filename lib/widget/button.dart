@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyButton extends StatelessWidget {
   const MyButton({
@@ -17,11 +18,17 @@ class MyButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(8.0).r,
         ),
-        padding: const EdgeInsets.all(25.0),
-        child: const Center(
-          child: Text('TAP'),
+        padding: const EdgeInsets.all(25.0).r,
+        margin: const EdgeInsets.all(25.0).r,
+        child: Center(
+          child: Text(
+            'TAP',
+            style: TextStyle(
+              fontSize: 12.0.sp,
+            ),
+          ),
         ),
       ),
     );

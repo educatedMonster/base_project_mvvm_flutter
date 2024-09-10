@@ -87,7 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: MyButton(
                       color: Theme.of(context).colorScheme.secondary,
                       onTap: () {
-                        _themeViewModel.toggleTheme();
+                        // _themeViewModel.toggleTheme();
+                        _counterViewModel.onGetDummyData();
                       },
                     ),
                   ),
