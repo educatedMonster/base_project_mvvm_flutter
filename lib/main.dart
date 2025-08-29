@@ -30,25 +30,58 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    ThemeViewModel utilityViewModel = context.watch<ThemeViewModel>();
-    return ScreenUtilInit(
-      designSize: const Size(360, 700),
-      splitScreenMode: true,
-      child: MaterialApp.router(
-        routerConfig: _appRouter.config(),
-        debugShowCheckedModeBanner: false,
-        title: Constants.titleApp,
-        theme: utilityViewModel.themeData,
-        builder: EasyLoading.init(
-          builder: (builder, widget) {
-            return MediaQuery(
-              ///Setting font does not change with system font size
-              data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
-              child: widget!,
+    ThemeViewModel utilityViewModel = context.watch();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Decide design size based on width
+        Size designSize;
+        if (constraints.maxWidth >= 1440) {
+          designSize = const Size(1440, 1024); // 4K / large desktop
+        } else if (constraints.maxWidth >= 1024) {
+          designSize = const Size(1024, 768); // desktop
+        } else if (constraints.maxWidth >= 600) {
+          designSize = const Size(600, 1024); // tablet
+        } else {
+          designSize = const Size(360, 700); // mobile
+        }
+
+        return ScreenUtilInit(
+          designSize: designSize,
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return MaterialApp.router(
+              routerConfig: _appRouter.config(),
+              debugShowCheckedModeBanner: false,
+              title: Constants.titleApp,
+              // theme: utilityViewModel.themeData,
+              // theme: ThemeData(
+              //   primarySwatch: Colors.blue,
+              //   textTheme: TextTheme(
+              //     bodySmall: TextStyle(fontSize: 12.sp),
+              //     bodyMedium: TextStyle(fontSize: 14.sp),
+              //     bodyLarge: TextStyle(fontSize: 16.sp),
+              //     headlineSmall: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+              //     headlineMedium: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+              //     headlineLarge: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold),
+              //   ),
+              // ),
+              theme: utilityViewModel.buildResponsiveTheme(),
+              builder: EasyLoading.init(
+                builder: (context, widget) {
+                  return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(
+                      textScaler: const TextScaler.linear(1.0),
+                    ),
+                    child: widget!,
+                  );
+                },
+              ),
             );
           },
-        ),
-      ),
+        );
+      },
     );
   }
 }
